@@ -15,6 +15,7 @@ public class Game {
 	public static Game instance;
 	private Main main;
 	private List<Sprite> sprites = new ArrayList<Sprite>();
+	private Sprite player;
 	private int reload;
 	
 	public Game() {
@@ -27,7 +28,8 @@ public class Game {
 	}
 	
 	public void initialize() {
-		sprites.add(new Sprite(100, 100, 50, 50, Color.WHITESMOKE));
+		player = new Sprite(100, 100, 50, 50, Color.WHITESMOKE);
+		sprites.add(player);
 	}
 	
 	public void renderFrame(GraphicsContext context, int frame) {
@@ -40,14 +42,12 @@ public class Game {
 		context.fillRect(0, 0, main.WIDTH, main.HEIGHT);
 		
 		if(main.isPressed("A"))
-			for(Sprite sprite : sprites)
-				sprite.setX(sprite.getX() - 10);
+			player.setX(player.getX() - 10);
 		else if(main.isPressed("D"))
-			for(Sprite sprite : sprites)
-				sprite.setX(sprite.getX() + 10);
+			player.setX(player.getX() + 10);
 		if(main.isPressed("T") && reload == 0) {
-			sprites.add(new PhysicsSprite(sprites.get(0).getX(), sprites.get(0)
-					.getY(), 10, 10, 40, 10, true, Color.BLANCHEDALMOND));
+			sprites.add(new PhysicsSprite(player.getX(), player.getY(), 10, 10,
+					40, 10, true, Color.BLANCHEDALMOND));
 			reload = RELOAD_TIME;
 		}
 		for(Sprite sprite : sprites) {
