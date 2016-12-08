@@ -5,28 +5,32 @@ import java.util.List;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import sprites.PhysicsSprite;
 import sprites.Sprite;
 
 public class Game {
 	
-	static Game instance;
-	Main main;
-	List<Sprite> sprites = new ArrayList<Sprite>();
+	public static final int RELOAD_TIME = 20;
 	
-	public Game(){
+	public static Game instance;
+	private Main main;
+	private List<Sprite> sprites = new ArrayList<Sprite>();
+	private int reload;
+	
+	public Game() {
 		instance = this;
 		main = Main.getInstance();
 	}
 	
-	public static Game getInstance(){
+	public static Game getInstance() {
 		return instance;
 	}
-
-	public void initialize(){
+	
+	public void initialize() {
 		sprites.add(new Sprite(100, 100, 50, 50, Color.WHITESMOKE));
 	}
 	
-	public void renderFrame(GraphicsContext context, int frame){
+	public void renderFrame(GraphicsContext context, int frame) {
 		
 		if(main.isPressed("BACK_SPACE"))
 			System.exit(0);
@@ -41,9 +45,20 @@ public class Game {
 		else if(main.isPressed("D"))
 			for(Sprite sprite : sprites)
 				sprite.setX(sprite.getX() + 10);
-		
-		for(Sprite sprite : sprites)
+		else if(main.isPressed("T") && reload == 0) {
+			sprites.add(new PhysicsSprite(sprites.get(0).getX(), sprites.get(0)
+					.getY(), 10, 10, 40, 0, Color.BLANCHEDALMOND));
+			reload = RELOAD_TIME;
+		}
+		for(Sprite sprite : sprites) {
 			sprite.draw(context);
+			if(sprite instanceof PhysicsSprite) {
+				((PhysicsSprite) sprite).tick();
+			}
+		}
+		if(reload > 0) {
+			reload--;
+		}
 	}
 	
 }

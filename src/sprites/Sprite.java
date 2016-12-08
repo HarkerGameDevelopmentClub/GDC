@@ -5,11 +5,11 @@ import javafx.scene.paint.Color;
 
 public class Sprite {
 	
-	double x;
-	double y;
-	double width;
-	double height;
-	Color color;
+	private double x;
+	private double y;
+	private double width;
+	private double height;
+	private Color color;
 	
 	public Sprite(double x, double y, double width, double height, Color color){
 		this.x = x;
