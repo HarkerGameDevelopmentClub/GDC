@@ -32,7 +32,7 @@ public class PhysicsSprite extends Sprite {
 	
 	public void tick(int timePassed){
 		setX(getX() + vx * timePassed);
-		setY(getY() + (vy + GRAVITY/2) * timePassed);
+		setY(getY() + (vy + GRAVITY * timePassed / 2) * timePassed);
 		setVy(getVy() + GRAVITY * timePassed);
 	}
 	
