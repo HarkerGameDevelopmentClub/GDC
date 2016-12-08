@@ -11,10 +11,11 @@ import javafx.scene.paint.Color;
  */
 public class PhysicsSprite extends Sprite {
 	
-	public static final double GRAVITY = 0.1;
+	public static final double GRAVITY = 0.2;
 	
 	private double vx;
 	private double vy;
+	private boolean hasGravity;
 	
 	/**
 	 * @param x
@@ -24,16 +25,21 @@ public class PhysicsSprite extends Sprite {
 	 * @param color
 	 */
 	public PhysicsSprite(double x, double y, double width, double height,
-			double vx, double vy, Color color) {
+			double vx, double vy, boolean hasGravity, Color color) {
 		super(x, y, width, height, color);
 		this.vx = vx;
 		this.vy = vy;
+		this.hasGravity = hasGravity;
 	}
 	
 	public void tick(int timePassed){
 		setX(getX() + vx * timePassed);
-		setY(getY() + (vy + GRAVITY * timePassed / 2) * timePassed);
-		setVy(getVy() + GRAVITY * timePassed);
+		if(hasGravity){
+			setY(getY() + (vy + GRAVITY * timePassed / 2) * timePassed);
+			setVy(getVy() + GRAVITY * timePassed);
+		} else {
+			setY(getY() + vy * timePassed);
+		}
 	}
 	
 	public void tick(){

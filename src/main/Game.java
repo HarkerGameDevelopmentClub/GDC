@@ -45,9 +45,9 @@ public class Game {
 		else if(main.isPressed("D"))
 			for(Sprite sprite : sprites)
 				sprite.setX(sprite.getX() + 10);
-		else if(main.isPressed("T") && reload == 0) {
+		if(main.isPressed("T") && reload == 0) {
 			sprites.add(new PhysicsSprite(sprites.get(0).getX(), sprites.get(0)
-					.getY(), 10, 10, 40, 0, Color.BLANCHEDALMOND));
+					.getY(), 10, 10, 40, 10, true, Color.BLANCHEDALMOND));
 			reload = RELOAD_TIME;
 		}
 		for(Sprite sprite : sprites) {
