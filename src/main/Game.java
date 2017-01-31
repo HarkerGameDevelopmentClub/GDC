@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import sprites.Coal;
 import sprites.PhysicsSprite;
 import sprites.Sprite;
 
@@ -46,15 +47,12 @@ public class Game {
 		else if(main.isPressed("D"))
 			player.setX(player.getX() + 10);
 		if(main.isPressed("T") && reload == 0) {
-			sprites.add(new PhysicsSprite(player.getX(), player.getY(), 10, 10,
-					40, 10, true, Color.BLANCHEDALMOND));
+			sprites.add(new Coal(player.getX(), player.getY(), 40, 10));
 			reload = RELOAD_TIME;
 		}
 		for(Sprite sprite : sprites) {
+			sprite.tick();
 			sprite.draw(context);
-			if(sprite instanceof PhysicsSprite) {
-				((PhysicsSprite) sprite).tick();
-			}
 		}
 		if(reload > 0) {
 			reload--;

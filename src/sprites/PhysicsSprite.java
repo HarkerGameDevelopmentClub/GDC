@@ -41,10 +41,6 @@ public class PhysicsSprite extends Sprite {
 			setY(getY() + vy * timePassed);
 		}
 	}
-	
-	public void tick(){
-		tick(1);
-	}
 
 	/**
 	 * @return the vx

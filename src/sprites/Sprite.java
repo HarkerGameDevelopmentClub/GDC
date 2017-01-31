@@ -19,6 +19,14 @@ public class Sprite {
 		this.color = color;
 	}
 	
+	public void tick(int time){
+		
+	}
+	
+	public void tick(){
+		tick(1);
+	}
+	
 	public double getX() {
 		return x;
 	}
