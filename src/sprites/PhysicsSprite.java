@@ -4,6 +4,7 @@
 package sprites;
 
 import javafx.scene.paint.Color;
+import main.Main;
 
 /**
  * @author joelmanning
@@ -35,8 +36,16 @@ public class PhysicsSprite extends Sprite {
 	public void tick(int timePassed){
 		setX(getX() + vx * timePassed);
 		if(hasGravity){
-			setY(getY() + (vy + GRAVITY * timePassed / 2) * timePassed);
-			setVy(getVy() + GRAVITY * timePassed);
+			double targetY = getY() + (vy + GRAVITY * timePassed / 2) * timePassed;
+			double bottom = Main.getInstance().HEIGHT*9/10.0 - this.getHeight();
+			if(targetY <= bottom){
+				setY(targetY);
+				setVy(getVy() + GRAVITY * timePassed);
+			}
+			else if(vy > 0){
+				setY(bottom);
+				setVy(0);
+			}
 		} else {
 			setY(getY() + vy * timePassed);
 		}
